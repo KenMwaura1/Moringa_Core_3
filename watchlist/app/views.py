@@ -20,4 +20,3 @@ def movie(movie_id: int):
     :return: movie details template
     """
     return render_template('movie.html', id=movie_id)
-
