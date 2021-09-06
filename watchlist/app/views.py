@@ -6,10 +6,11 @@ from . import app
 @app.route('/')
 def index():
     """
-    root page view that returns the index page
+    root page view that returns the index page and its data
     :return: index template
     """
-    return render_template('index.html')
+    title = "Home -  Welcome to the best Movie review website "
+    return render_template('index.html', title=title)
 
 
 @app.route('/movie/<int:movie_id>')
