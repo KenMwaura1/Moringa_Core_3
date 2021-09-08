@@ -1,6 +1,6 @@
 class Review:
     """
-    class to model reviews received frommthe API.
+    class to model reviews
     """
     all_reviews = []
 
@@ -16,4 +16,8 @@ class Review:
     @classmethod
     def clear_reviews(cls):
         Review.all_reviews.clear()
-        
+
+    @classmethod
+    def get_reviews(cls, id: int):
+        return [review for review in cls.all_reviews if review.movie_id == id]
+
