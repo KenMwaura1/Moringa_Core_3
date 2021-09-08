@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    {% if title %}
-    <title> {{ title }}</title>
-    {% else %}
-    <title> Welcome to the best Movie Review website </title>
-    {% endif %}
-</head>
-<body>
+{% extends 'base.html' %}
 {% import 'macros.html' as macro %}
+{% block content %}
 <!-- Popular movie section  -->
 <h3> Popular Movies</h3>
 <ul>
@@ -26,5 +17,5 @@
     {{ macro.displayMovieList(now_showing)}}
 </ul>
 
-</body>
-</html>
+{% endblock %}
+
