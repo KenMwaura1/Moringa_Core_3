@@ -1,17 +1,23 @@
-from . import app
-import urllib.request, json
-from .models import movie
+import json
+import urllib.request
 
-Movie = movie.Movie
+from .models import Movie
 
 # Get the Api key for movie api
-api_key = app.config['MOVIE_API_KEY']
+api_key = None
 
 # get the movie base url
-base_url = app.config['MOVIE_API_BASE_URL']
+base_url = None
 
 # get the movie base poster url
-poster_url = app.config['MOVIE_POSTER_BASE_URL']
+poster_url = None
+
+
+def configure_request(app):
+    global api_key, base_url, poster_url
+    api_key = app.config['MOVIE_API_KEY']
+    base_url = app.config['MOVIE_API_BASE_URL']
+    poster_url = app.config['MOVIE_Poster_URL']
 
 
 def get_movies_posters(poster_path):

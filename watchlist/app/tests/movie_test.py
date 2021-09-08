@@ -1,8 +1,5 @@
 import unittest
-from models import movie
-from watchlist.app.models.movie import Movie
-
-Movie = movie.Movie
+from watchlist.app.models import Movie
 
 
 class MovieTestCase(unittest.TestCase):
@@ -23,4 +20,4 @@ class MovieTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    pass

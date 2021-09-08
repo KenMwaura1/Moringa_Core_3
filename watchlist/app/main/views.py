@@ -1,15 +1,12 @@
 from flask import render_template, request, redirect, url_for
-from watchlist.app import app
-from watchlist.app.models.reviews import Review
+from . import main
 from watchlist.app.request import get_movies, get_movie, search_movie
-from watchlist.app.models import reviews
+from watchlist.app.models import Review
 from watchlist.app.main.forms import ReviewForm
-
-Review = reviews.Review
 
 
 # Views
-@app.route('/')
+@main.route('/')
 def index():
     """
     root page view that returns the index page and its data
@@ -22,13 +19,13 @@ def index():
 
     search = request.args.get('movie_query')
     if search:
-        return redirect(url_for('search_movie', movie_name=search))
+        return redirect(url_for('main.search_movie', movie_name=search))
     title = "Home -  Welcome to the best Movie review website "
     return render_template('watchlist/app/templates/index.html', title=title, popular=popular_movies,
                            upcoming=upcoming_movies, now_showing=now_showing_movie)
 
 
-@app.route('/movie/<int:movie_id>')
+@main.route('/movie/<int:movie_id>')
 def movie(movie_id: int):
     """
     movie view page that takes an id and returns movie details and data
@@ -41,7 +38,7 @@ def movie(movie_id: int):
     return render_template('watchlist/app/templates/movie.html', title=title, movie=movie, reviews=reviews)
 
 
-@app.route('/search/<string:movie_name>')
+@main.route('/search/<string:movie_name>')
 def search(movie_name: str):
     """
     view function to display search results
@@ -55,7 +52,7 @@ def search(movie_name: str):
     return render_template('watchlist/app/templates/search.html', movies=searched_movies, title=title)
 
 
-@app.route('/movie/review/new/<int:id>', methods=['GET', 'POST'])
+@main.route('/movie/review/new/<int:id>', methods=['GET', 'POST'])
 def new_review(id):
     form = ReviewForm()
     movie = get_movie(id)
@@ -65,7 +62,7 @@ def new_review(id):
         review = form.review.data
         new_review = Review(movie.id, title, movie.poster, review)
         new_review.save_review()
-        return redirect(url_for('movie', movie_id=movie.id))
+        return redirect(url_for('main.movie', movie_id=movie.id))
 
     title = f'{movie.title} review'
     return render_template('watchlist/app/templates/new_review.html', title=title, review_form=form, movie=movie)
