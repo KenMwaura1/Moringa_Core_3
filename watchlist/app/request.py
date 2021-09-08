@@ -10,6 +10,22 @@ api_key = app.config['MOVIE_API_KEY']
 # get the movie base url
 base_url = app.config['MOVIE_API_BASE_URL']
 
+# get the movie base poster url
+poster_url = app.config['MOVIE_POSTER_BASE_URL']
+
+
+def get_movies_posters(poster_path):
+    """
+
+    :param poster_url:
+    :return:
+    """
+    get_poster_url = poster_url.format(poster_path)
+    url = urllib.request.urlopen(get_poster_url).read()
+    poster = url
+    print(get_poster_url)
+    print(poster)
+
 
 def get_movies(category: str):
     """
@@ -18,6 +34,7 @@ def get_movies(category: str):
     :return: list of movies
     """
     get_movies_url = base_url.format(category, api_key)
+
     with urllib.request.urlopen(get_movies_url) as url:
         get_movies_data = url.read()
         get_movies_response = json.loads(get_movies_data)
@@ -68,12 +85,13 @@ def process_movie_results(movie_list):
         id = movie_item.get('id')
         title = movie_item.get('original_title')
         overview = movie_item.get('overview')
-        poster = movie_item.get('poster_path')
+        poster_path = movie_item.get('poster_path')
+
         vote_average = movie_item.get('vote_average')
         vote_count = movie_item.get('vote-vote_count')
 
-        if poster:
-            movie_object = Movie(id, title, overview, poster, vote_average, vote_count)
+        if poster_path:
+            movie_object = Movie(id, title, overview, poster_path, vote_average, vote_count)
             movie_results.append(movie_object)
 
     return movie_results

@@ -27,6 +27,6 @@ def movie(movie_id: int):
     :return: movie details template
     """
     movie = get_movie(movie_id)
-    # title = f'{movie.title}'
+    title = f'{movie.title}'
     print(movie)
-    return render_template('movie.html', title='title', movie=movie)
+    return render_template('movie.html', title=title, movie=movie)
