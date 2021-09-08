@@ -30,6 +30,33 @@ def get_movies(category: str):
     return movie_results
 
 
+def get_movie(movie_id: int):
+    """
+    function to retrieve a single movie from the Api using the ID.
+    :param movie_id: ID of the movie to get.
+    :return: single movie object
+    """
+
+    get_movie_details_url = base_url.format(movie_id, api_key)
+
+    def extract_movie(movie_details_response):
+        id = movie_details_response.get('id')
+        title = movie_details_response.get('original_title')
+        overview = movie_details_response.get('overview')
+        poster = movie_details_response.get('poster_path')
+        vote_average = movie_details_response.get('vote_average')
+        vote_count = movie_details_response.get('vote_count')
+        return Movie(id, title, overview, poster, vote_average, vote_count)
+
+    with urllib.request.urlopen(get_movie_details_url) as url:
+        movie_details_data = url.read()
+        movie_details_response = json.loads(movie_details_data)
+        movie_object = None
+        if movie_details_response:
+            movie_object = extract_movie(movie_details_response)
+    return movie_object
+
+
 def process_movie_results(movie_list):
     """
     Function that processes movie list returned ny the API to a list of objects

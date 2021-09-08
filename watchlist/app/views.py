@@ -1,6 +1,6 @@
 from flask import render_template, current_app
 from . import app
-from .request import get_movies
+from .request import get_movies, get_movie
 
 
 # Views
@@ -26,4 +26,7 @@ def movie(movie_id: int):
     :param movie_id: integer reference to movie
     :return: movie details template
     """
-    return render_template('movie.html', id=movie_id)
+    movie = get_movie(movie_id)
+    # title = f'{movie.title}'
+    print(movie)
+    return render_template('movie.html', title='title', movie=movie)
