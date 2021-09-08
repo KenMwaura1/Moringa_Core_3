@@ -17,7 +17,7 @@ def configure_request(app):
     global api_key, base_url, poster_url
     api_key = app.config['MOVIE_API_KEY']
     base_url = app.config['MOVIE_API_BASE_URL']
-    poster_url = app.config['MOVIE_Poster_URL']
+    poster_url = app.config['MOVIE_POSTER_BASE_URL']
 
 
 def get_movies_posters(poster_path):

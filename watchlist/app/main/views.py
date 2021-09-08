@@ -1,8 +1,8 @@
 from flask import render_template, request, redirect, url_for
 from . import main
-from watchlist.app.request import get_movies, get_movie, search_movie
-from watchlist.app.models import Review
-from watchlist.app.main.forms import ReviewForm
+from ..request import get_movies, get_movie, search_movie
+from ..models import Review
+from ..main.forms import ReviewForm
 
 
 # Views
@@ -21,7 +21,7 @@ def index():
     if search:
         return redirect(url_for('main.search_movie', movie_name=search))
     title = "Home -  Welcome to the best Movie review website "
-    return render_template('watchlist/app/templates/index.html', title=title, popular=popular_movies,
+    return render_template('movie.html', title=title, popular=popular_movies,
                            upcoming=upcoming_movies, now_showing=now_showing_movie)
 
 
@@ -35,7 +35,7 @@ def movie(movie_id: int):
     movie = get_movie(movie_id)
     title = f'{movie.title}'
     reviews = Review.get_reviews(movie.id)
-    return render_template('watchlist/app/templates/movie.html', title=title, movie=movie, reviews=reviews)
+    return render_template('movie.html', title=title, movie=movie, reviews=reviews)
 
 
 @main.route('/search/<string:movie_name>')
@@ -49,7 +49,7 @@ def search(movie_name: str):
     movie_name_format = "+".join(movie_name_list)
     searched_movies = search_movie(movie_name_format)
     title = f'search results for {movie_name}'
-    return render_template('watchlist/app/templates/search.html', movies=searched_movies, title=title)
+    return render_template('search.html', movies=searched_movies, title=title)
 
 
 @main.route('/movie/review/new/<int:id>', methods=['GET', 'POST'])
@@ -65,4 +65,4 @@ def new_review(id):
         return redirect(url_for('main.movie', movie_id=movie.id))
 
     title = f'{movie.title} review'
-    return render_template('watchlist/app/templates/new_review.html', title=title, review_form=form, movie=movie)
+    return render_template('new_review.html', title=title, review_form=form, movie=movie)

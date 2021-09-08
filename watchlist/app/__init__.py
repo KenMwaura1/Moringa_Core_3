@@ -1,8 +1,6 @@
-from ensurepip import bootstrap
-
 from flask import Flask
 from flask_bootstrap import Bootstrap
-from watchlist.config import config_options
+from .config import config_options
 
 bootstrap = Bootstrap()
 
@@ -25,7 +23,7 @@ def create_app(config_name):
     from .request import configure_request
     configure_request(app)
 
-    from watchlist.app.main import views
-    from watchlist.app.main import error
+    from .main import views
+    from .main import error
 
     return app

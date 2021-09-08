@@ -5,7 +5,8 @@ from flask_script import Manager, Server
 app = create_app('development')
 
 manager = Manager(app)
-manager.add_command('server', Server)
+server = Server(host='localhost', port=8096)
+manager.add_command('server', server)
 
 if __name__ == '__main__':
     manager.run()
