@@ -1,5 +1,5 @@
 import unittest
-from watchlist.app.models import Movie
+from ..app.models import Movie
 
 
 class MovieTestCase(unittest.TestCase):
@@ -19,5 +19,3 @@ class MovieTestCase(unittest.TestCase):
         self.assertTrue(isinstance(self.new_movie, Movie))
 
 
-if __name__ == '__main__':
-    pass

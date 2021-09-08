@@ -23,8 +23,8 @@ def configure_request(app):
 def get_movies_posters(poster_path):
     """
 
-    :param poster_url:
-    :return:
+    :param poster_path:
+    :return: link to the movie poster
     """
     get_poster_url = poster_url.format(poster_path)
     url = urllib.request.urlopen(get_poster_url).read()
@@ -66,10 +66,10 @@ def get_movie(movie_id: int):
         id = movie_details_response.get('id')
         title = movie_details_response.get('original_title')
         overview = movie_details_response.get('overview')
-        poster = movie_details_response.get('poster_path')
+        poster_path = movie_details_response.get('poster_path')
         vote_average = movie_details_response.get('vote_average')
         vote_count = movie_details_response.get('vote_count')
-        return Movie(id, title, overview, poster, vote_average, vote_count)
+        return Movie(id, title, overview, poster_path, vote_average, vote_count)
 
     with urllib.request.urlopen(get_movie_details_url) as url:
         movie_details_data = url.read()

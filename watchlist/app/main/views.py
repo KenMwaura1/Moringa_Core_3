@@ -21,7 +21,7 @@ def index():
     if search:
         return redirect(url_for('main.search_movie', movie_name=search))
     title = "Home -  Welcome to the best Movie review website "
-    return render_template('movie.html', title=title, popular=popular_movies,
+    return render_template('index.html', title=title, popular=popular_movies,
                            upcoming=upcoming_movies, now_showing=now_showing_movie)
 
 
