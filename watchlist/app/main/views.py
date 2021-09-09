@@ -19,7 +19,7 @@ def index():
 
     search = request.args.get('movie_query')
     if search:
-        return redirect(url_for('main.search_movie', movie_name=search))
+        return redirect(url_for('main.search', movie_name=search))
     title = "Home -  Welcome to the best Movie review website "
     return render_template('index.html', title=title, popular=popular_movies,
                            upcoming=upcoming_movies, now_showing=now_showing_movie)
