@@ -9,4 +9,4 @@ def error_handler(error):
     :param error:
     :return: 404 error page
     """
-    return render_template('watchlist/app/templates/404.html'), 404
+    return render_template('404.html'), 404
