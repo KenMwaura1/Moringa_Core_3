@@ -1,5 +1,5 @@
 import unittest
-from ..app.models import Movie
+from app.models import Movie
 
 
 class MovieTestCase(unittest.TestCase):
@@ -12,7 +12,7 @@ class MovieTestCase(unittest.TestCase):
         setUp method that will run before every test
         :return: new instance of Movie class
         """
-        self.new_movie = Movie(1234, 'Python Must be crazy', 'A thrilling new Python series, '
+        self.new_movie = Movie(1234, 'Python Must be crazy', 'A thrilling new Python series',
                                                              'https://image.tmdb.org/t/p/w500/khsjha27hbs', 8.5, 129993)
 
     def test_instance(self):

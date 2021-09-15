@@ -1,0 +1,16 @@
+from flask_mail import Message
+from flask import render_template
+from dotenv import load_dotenv
+import os
+
+from . import mail
+
+load_dotenv()
+
+
+def mail_message(subject, template, to,**kwargs):
+    sender_mail = os.environ.get('MAIL_USERNAME')
+    email = Message(subject, sender=sender_mail, recipients=[to])
+    email.body = render_template(template + ".txt", **kwargs)
+    email.html = render_template(template + ".html", **kwargs)
+    mail.send(email)
