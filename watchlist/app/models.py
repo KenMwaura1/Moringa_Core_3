@@ -27,19 +27,13 @@ class Review(db.Model):
     all_reviews = []
     __tablename__ = 'reviews'
 
-    id = db.Column(db.Integer,primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     movie_id = db.Column(db.Integer)
     movie_title = db.Column(db.String)
     image_path = db.Column(db.String)
     movie_review = db.Column(db.String)
-    posted = db.Column(db.DateTime,default=datetime.utcnow)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-
-    def __init__(self, movie_id, title, imageurl, review):
-        self.movie_id = movie_id
-        self.title = title
-        self.imageurl = imageurl
-        self.review = review
+    posted = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
 
     def save_review(self):
         db.session.add(self)
@@ -65,12 +59,7 @@ class User(UserMixin, db.Model):
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String(255))
     password_secure = db.Column(db.String(255))
-    reviews = db.relationship('Review', backref = 'user', lazy="dynamic")
-
-    def __init__(self, username, email, password):
-        self.username = username
-        self.email = email
-        self.password = password
+    reviews = db.relationship('Review', backref='user', lazy="dynamic")
 
     @property
     def password(self):

@@ -12,7 +12,6 @@ class Config:
     MOVIE_POSTER_BASE_URL = 'https://image.tmdb.org/t/p/original{}'
     MOVIE_API_KEY = os.environ.get('MOVIE_API_KEY')
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
     UPLOADED_PHOTOS_DEST = 'app/static/photos'
     MAIL_SERVER = 'smtp.googlemail.com'
     MAIL_PORT = 587
@@ -21,11 +20,16 @@ class Config:
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
 
 
+class TestConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.environ.get("TEST_SQLALCHEMY_DATABASE_URI")
+
+
 class Devconfig(Config):
     """
     Development configuration child class
     :param: Config parent configuration class with general configuration settings.
     """
+    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
     DEBUG = True
 
 
@@ -39,5 +43,6 @@ class ProdConfig(Config):
 
 config_options = {
     'development': Devconfig,
-    'production': ProdConfig
+    'production': ProdConfig,
+    'test': TestConfig
 }

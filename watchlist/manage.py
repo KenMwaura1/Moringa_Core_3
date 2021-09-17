@@ -2,11 +2,11 @@ from flask_migrate import Migrate, MigrateCommand
 
 from app import create_app, db
 from flask_script import Manager, Server
-from app.models import User, Role
+from app.models import User, Role, Review
 
 # creating app instance
 app = create_app('development')
-
+print(app.config['SQLALCHEMY_DATABASE_URI'])
 manager = Manager(app)
 server = Server(host='localhost', port=8190, use_debugger=True, use_reloader=True)
 migrate = Migrate(app, db)
@@ -18,9 +18,12 @@ manager.add_command('db', MigrateCommand)
 def test():
     """
     function to run the unit tests
-    :return:
+    :return: status of the tests run
     """
     import unittest
+    test_app = create_app('test')
+    # print(app.config['SQLALCHEMY_DATABASE_URI'])
+    app.config['SQLALCHEMY_DATABASE_URI'] = test_app.config['SQLALCHEMY_DATABASE_URI']
     tests = unittest.TestLoader().discover('tests')
     unittest.TextTestRunner(verbosity=2).run(tests)
 
