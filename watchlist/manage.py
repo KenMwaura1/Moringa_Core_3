@@ -6,7 +6,6 @@ from app.models import User, Role, Review
 
 # creating app instance
 app = create_app('development')
-print(app.config['SQLALCHEMY_DATABASE_URI'])
 manager = Manager(app)
 server = Server(host='localhost', port=8190, use_debugger=True, use_reloader=True)
 migrate = Migrate(app, db)

@@ -18,6 +18,9 @@ class Config:
     MAIL_USE_TLS = True
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    # simple mde  configurations
+    SIMPLEMDE_JS_IIFE = True
+    SIMPLEMDE_USE_CDN = True
 
 
 class TestConfig(Config):
@@ -29,7 +32,7 @@ class Devconfig(Config):
     Development configuration child class
     :param: Config parent configuration class with general configuration settings.
     """
-    SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')
+    SQLALCHEMY_DATABASE_URI = str(os.environ.get('SQLALCHEMY_DATABASE_URI'))
     DEBUG = True
 
 
